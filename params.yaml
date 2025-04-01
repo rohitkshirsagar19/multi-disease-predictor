@@ -1,0 +1,27 @@
+base:
+  project: multi-disease-predictor
+  random_state: 20
+  split_ratio: 0.25
+
+data_source:
+  Anemia: data/processed/Anemia.csv
+  Cardiovascular: data/processed/Cardiovascular.csv
+  Heart: data/processed/cleaned_heart.csv
+  Hepatitis_C: data/processed/Hepatitis_C.csv
+  Lung_cancer: data/processed/lung_cancer_processed.csv
+  Thyroid: data/processed/thyroid_cleaned_data.csv  
+
+Hepatitis_C:
+  SVC:
+    params:
+      C: 10
+      gamma: scale
+      kernel: rbf
+  model_path: models/hepatitis.joblib
+
+mlflow_config:
+  artifacts_dir: artifacts
+  experiment_name: hepatitis
+  run_name: hepaptitis
+  registered_model_name: SVC
+  remote_server_uri: http://127.0.0.1:5000

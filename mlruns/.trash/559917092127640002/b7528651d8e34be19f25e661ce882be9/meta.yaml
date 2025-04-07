@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/559917092127640002/b7528651d8e34be19f25e661ce882be9/artifacts
+deleted_time: 1744003504892
 end_time: 1744002500197
 entry_point_name: ''
 experiment_id: '559917092127640002'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: b7528651d8e34be19f25e661ce882be9
 run_name: hepaptitis
 run_uuid: b7528651d8e34be19f25e661ce882be9

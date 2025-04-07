@@ -1,6 +1,7 @@
 artifact_location: mlflow-artifacts:/559917092127640002
 creation_time: 1744002495633
 experiment_id: '559917092127640002'
-last_update_time: 1744002495633
-lifecycle_stage: active
+last_update_time: 1744003586873
+lifecycle_stage: deleted
 name: hepatitis
+tags: {}

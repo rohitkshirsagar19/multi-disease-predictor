@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/559917092127640002/55e7e18f3ae24640b00a9d2e222e554d/artifacts
+deleted_time: 1744003504892
+end_time: 1744003442779
+entry_point_name: ''
+experiment_id: '559917092127640002'
+lifecycle_stage: deleted
+run_id: 55e7e18f3ae24640b00a9d2e222e554d
+run_name: cardio
+run_uuid: 55e7e18f3ae24640b00a9d2e222e554d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744003438783
+status: 3
+tags: []
+user_id: prajw

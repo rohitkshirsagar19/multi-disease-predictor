@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/559917092127640002/b7528651d8e34be19f25e661ce882be9/artifacts
+end_time: 1744002500197
+entry_point_name: ''
+experiment_id: '559917092127640002'
+lifecycle_stage: active
+run_id: b7528651d8e34be19f25e661ce882be9
+run_name: hepaptitis
+run_uuid: b7528651d8e34be19f25e661ce882be9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744002495883
+status: 3
+tags: []
+user_id: prajw

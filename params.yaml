@@ -9,7 +9,9 @@ data_source:
   Heart: data/processed/cleaned_heart.csv
   Hepatitis_C: data/processed/Hepatitis_C.csv
   Lung_cancer: data/processed/lung_cancer_processed.csv
-  Thyroid: data/processed/thyroid_cleaned_data.csv  
+  Thyroid: data/processed/thyroid_cleaned_data.csv
+  Stroke: data/processed/processed_healthcare_data.csv
+  Liver: data/processed/indian_liver_patient_processed.csv  
 
 Hepatitis_C:
   SVC:
@@ -19,9 +21,16 @@ Hepatitis_C:
       kernel: rbf
   model_path: models/hepatitis.joblib
 
+Liver:
+  RandomForestClassifier:
+    params:
+      n_estimators: 5
+      min_sample_split: 2
+  model_path: models/liver.joblib
+
 mlflow_config:
   artifacts_dir: artifacts
-  experiment_name: hepatitis
-  run_name: hepaptitis
-  registered_model_name: SVC
+  experiment_name: liver
+  run_name: liver
+  registered_model_name: RandomForestClassifier
   remote_server_uri: http://127.0.0.1:5000

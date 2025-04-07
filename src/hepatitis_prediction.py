@@ -7,7 +7,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score,precision_score, recall_score, f1_score
 import mlflow
-import argparse
 import joblib
 from urllib.parse import urlparse
 

@@ -33,4 +33,19 @@ mlflow_config:
   experiment_name: liver
   run_name: liver
   registered_model_name: RandomForestClassifier
+
+Cardiovascular:
+  RandomForestClassifier :
+    params:
+      max_depth: 10
+      min_samples_leaf: 2
+      min_samples_split: 2
+      n_estimators: 100
+  model_path: models/cardiovascular.joblib
+
+mlflow_config:
+  artifacts_dir: artifacts
+  experiment_name: hepatitis
+  run_name: cardio
+  registered_model_name: randomforest
   remote_server_uri: http://127.0.0.1:5000

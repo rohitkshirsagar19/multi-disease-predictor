@@ -20,6 +20,13 @@ Hepatitis_C:
       gamma: scale
       kernel: rbf
   model_path: models/hepatitis.joblib
+  mlflow_config:
+    artifacts_dir: artifacts
+    experiment_name: Hepatitis_C
+    run_name: test2
+    registered_model_name: SVC
+    remote_server_uri: http://127.0.0.1:5000
+
 
 Liver:
   RandomForestClassifier:
@@ -37,6 +44,13 @@ Cardiovascular:
       min_samples_split: 2
       n_estimators: 100
   model_path: models/cardiovascular.joblib
+  mlflow_config:
+    artifacts_dir: artifacts
+    experiment_name: Cardiovascular
+    run_name: test1
+    registered_model_name: RandomForestClassifier
+    remote_server_uri: http://127.0.0.1:5000
+
 
 Anemia:
   RandomForestClassifier :
@@ -60,19 +74,12 @@ lung_cancer:
       max_iter: 100
       penalty: l2
       solver: liblinear
-  model_path: models/lung_cancer.joblib
-  mlflow_config:
-    artifacts_dir: artifacts
-    experiment_name: Lung_cancer
-    run_name: lung_cancer
-    registered_model_name: LogisticRegression
-    remote_server_uri: http://127.0.0.1:5000
 
 
 
-mlflow_config:
-  artifacts_dir: artifacts
-  experiment_name: hepatitis
-  run_name: liver
-  registered_model_name: RandomForestClassifier
-  remote_server_uri: http://127.0.0.1:5000
+# mlflow_config:
+#   artifacts_dir: artifacts
+#   experiment_name: hepatitis
+#   run_name: liver
+#   registered_model_name: RandomForestClassifier
+#   remote_server_uri: http://127.0.0.1:5000

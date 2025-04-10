@@ -40,7 +40,7 @@ def train_and_evaluate(config_path):
         )
     ###########################
 
-    mlflow_config = config["mlflow_config"]
+    mlflow_config = config["Cardiovascular"]["mlflow_config"]
     remote_server_uri = mlflow_config["remote_server_uri"]
     mlflow.set_tracking_uri(remote_server_uri)
     mlflow.set_experiment(mlflow_config["experiment_name"])

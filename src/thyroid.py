@@ -31,6 +31,7 @@ def train_and_evaluate(config_path):
     random_state = config['base']['random_state']
     split_ratio = config['base']['split_ratio']
     rf_params = config['Thyroid']['RandomForestClassifier']['params']
+    model_dir = config['Thyroid']['model_path']
 
     print(f"📊 Splitting data (test size = {split_ratio})...")
     features = df.drop(columns=['Diagnosis'], axis=1)
@@ -67,6 +68,19 @@ def train_and_evaluate(config_path):
     print(f" Precision: {precision:.4f}")
     print(f" Recall: {recall:.4f}")
     print(f" F1 Score: {f1:.4f}")
+    model_dir = config['Thyroid']['model_dir']
+
+    
+
+    if not os.path.exists(model_dir):
+        os.makedirs(model_dir)
+        print(f"📁 Created model directory: {model_dir}")
+    else:
+        print(f"📁 Model directory already exists: {model_dir}")
+
+    model_path = os.path.join(model_dir, 'thyroid_model.joblib')
+    joblib.dump(rf, model_path)
+    print(f"✅ Model saved at {model_path}")
 
     # MLflow tracking
     print("📦 Setting up MLflow...")

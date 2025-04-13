@@ -77,8 +77,8 @@ lung_cancer:
 
 
 Thyroid:
-  model_path: models
-  
+  model_path: models/thyroid.joblib
+  model_dir: models/thyroid_model
   RandomForestClassifier:
     params:
       n_estimators: 100
@@ -93,7 +93,7 @@ Thyroid:
     remote_server_uri: "http://127.0.0.1:5000"
 
 Heart:
-  model_path: models
+  model_path: models/heart.joblib
 
   RandomForestClassifier:
     params:

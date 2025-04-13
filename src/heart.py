@@ -64,7 +64,7 @@ def train_and_evaluate(config_path):
         print(f"📁 Model directory already exists: {model_dir}")
 
     # Save the model as heart_model.pkl within the model directory.
-    model_path = os.path.join(model_dir, 'heart_model.pkl')
+    model_path = os.path.join(model_dir, 'heart_model.joblib')
     print("💾 Saving model...")
     joblib.dump(rf, model_path)
     print(f"✅ Model saved at {model_path}")

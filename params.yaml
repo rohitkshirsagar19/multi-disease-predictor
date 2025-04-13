@@ -76,6 +76,41 @@ lung_cancer:
       solver: liblinear
 
 
+Thyroid:
+  model_path: models
+  
+  RandomForestClassifier:
+    params:
+      n_estimators: 100
+      max_depth: 10
+      min_samples_split: 2
+      min_samples_leaf: 1
+  mlflow_config:
+    artifacts_dir: artifacts
+    experiment_name: "Thyroid_Disease_Experiment"
+    run_name: "Random_Forest_Thyroid"
+    registered_model_name: RandomForestClassifier
+    remote_server_uri: "http://127.0.0.1:5000"
+
+Heart:
+  model_path: models
+
+  RandomForestClassifier:
+    params:
+      n_estimators: 100
+      max_depth: 10
+      min_samples_split: 2
+      min_samples_leaf: 1
+
+  mlflow_config:
+    artifacts_dir: multi-disease-predictor/mlartifacts
+    experiment_name: "Heart_Disease_Experiment"
+    run_name: "Heart_Model_Comparison"
+    remote_server_uri: "http://127.0.0.1:5000"
+
+
+
+
 
 # mlflow_config:
 #   artifacts_dir: artifacts

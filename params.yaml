@@ -34,7 +34,25 @@ Liver:
       n_estimators: 5
       min_sample_split: 2
   model_path: models/liver.joblib
+  mlflow_config:
+    artifacts_dir: artifacts
+    experiment_name: liver
+    run_name: test1
+    registered_model_name: RandomForestClassifier
+    remote_server_uri: http://127.0.0.1:5000
 
+Stroke:
+  RandomForestClassifier:
+    params:
+      n_estimators: 10
+      max_depth: 5
+  model_path: models/stroke.joblib
+  mlflow_config:
+    artifacts_dir: artifacts
+    experiment_name: stroke
+    run_name: test2
+    registered_model_name: RandomForestClassifier
+    remote_server_uri: http://127.0.0.1:5000
 
 Cardiovascular:
   RandomForestClassifier :

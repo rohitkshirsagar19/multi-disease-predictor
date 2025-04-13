@@ -19,17 +19,17 @@ def read_param(config_path):
 
 def train_and_evaluate(config_path):
     config = read_param(config_path)
-    data_path = config["data_source"]["Liver"]
+    data_path = config["data_source"]["Stroke"]
     df = pd.read_csv(data_path, sep=',', encoding='utf-8')
     random_state = config["base"]["random_state"]
     split_ratio = config["base"]["split_ratio"]
-    model_dir = config["Liver"]["model_path"]
+    model_dir = config["Stroke"]["model_path"]
 
-    liver_n_estimators = config["Liver"]["RandomForestClassifier"]["params"]["n_estimators"]
-    liver_min_sample_split = config["Liver"]["RandomForestClassifier"]["params"]["min_sample_split"]
+    stroke_n_estimators = config["Stroke"]["RandomForestClassifier"]["params"]["n_estimators"]
+    stroke_max_depth = config["Stroke"]["RandomForestClassifier"]["params"]["max_depth"]
 
-    features=df.drop("Dataset",axis=1)
-    target=df['Dataset']
+    features=df.drop("stroke",axis=1)
+    target=df['stroke']
 
     X_train, X_test, y_train, y_test = train_test_split(
         features,
@@ -39,7 +39,7 @@ def train_and_evaluate(config_path):
         )
     ###########################
 
-    mlflow_config = config["Liver"]["mlflow_config"]
+    mlflow_config = config["Stroke"]["mlflow_config"]
     remote_server_uri = mlflow_config["remote_server_uri"]
     mlflow.set_tracking_uri(remote_server_uri)
     mlflow.set_experiment(mlflow_config["experiment_name"])
@@ -48,8 +48,8 @@ def train_and_evaluate(config_path):
     with mlflow.start_run(run_name=mlflow_config["run_name"]) as mlops_runs:    
     
         lr = RandomForestClassifier(
-            n_estimators = liver_n_estimators,
-            min_samples_split = liver_min_sample_split
+            n_estimators = stroke_n_estimators,
+            max_depth = stroke_max_depth
         )
 
         lr.fit(X_train,y_train)
@@ -62,8 +62,8 @@ def train_and_evaluate(config_path):
 
         
         
-        mlflow.log_param("n_estimators",liver_n_estimators)
-        mlflow.log_param("min_samples_split",liver_min_sample_split)
+        mlflow.log_param("n_estimators",stroke_n_estimators)
+        mlflow.log_param("max_depth",stroke_max_depth)
 
         mlflow.log_metric("accuracy",accuracy)
         mlflow.log_metric("precision",precision)
@@ -81,7 +81,7 @@ def train_and_evaluate(config_path):
         if os.path.exists(model_dir) and os.path.isfile(model_dir):
           os.remove(model_dir)
         os.makedirs(model_dir, exist_ok=True)
-        model_path = os.path.join(model_dir, "liver.joblib")
+        model_path = os.path.join(model_dir, "stroke.joblib")
         joblib.dump(lr, model_path)
 
 

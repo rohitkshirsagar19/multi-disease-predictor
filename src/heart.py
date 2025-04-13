@@ -7,6 +7,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
+from urllib.parse import urlparse
 
 def read_param(config_path):
     print("🔧 Loading configuration...")
@@ -80,6 +81,7 @@ def train_and_evaluate(config_path):
     print(f"🏷️ Run Name: {run_name}")
 
     mlflow.set_tracking_uri(remote_uri)
+
     try:
         mlflow.set_experiment(experiment_name)
     except Exception as e:
@@ -88,16 +90,22 @@ def train_and_evaluate(config_path):
     print("🚀 Starting MLflow run...")
     try:
         with mlflow.start_run(run_name=run_name):
-            # Log hyperparameters and primary metric (accuracy)
+            # Logging params and metrics
             mlflow.log_params(rf_params)
-            mlflow.log_metrics({'rf_accuracy': rf_metrics['accuracy']})
-            
+            mlflow.log_metrics(rf_metrics)
+
             print("📦 Logging model artifact to MLflow...")
-            mlflow.log_artifact(model_path, artifact_path="model")
-            print("✅ MLflow logging complete.")
+            tracking_uri_type = urlparse(mlflow.get_tracking_uri()).scheme
+            if tracking_uri_type != "file":
+                mlflow.sklearn.log_model(rf, "model", registered_model_name=mlflow_config["registered_model_name"])
+            else:
+                mlflow.sklearn.log_model(rf, "model")
+
+        print("✅ MLflow logging complete.")
     except Exception as e:
         print(f"❌ MLflow run failed: {e}")
 
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Train and evaluate models for Heart Disease Prediction.')
     parser.add_argument('--config', default='params.yaml', type=str, help='Path to the config file.')

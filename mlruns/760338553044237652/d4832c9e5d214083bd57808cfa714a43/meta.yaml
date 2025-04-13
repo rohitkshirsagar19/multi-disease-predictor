@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/760338553044237652/d4832c9e5d214083bd57808cfa714a43/artifacts
+deleted_time: 1744535324657
+end_time: 1744535051381
+entry_point_name: ''
+experiment_id: '760338553044237652'
+lifecycle_stage: deleted
+run_id: d4832c9e5d214083bd57808cfa714a43
+run_name: Heart_Model_Comparison
+run_uuid: d4832c9e5d214083bd57808cfa714a43
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744535051356
+status: 4
+tags: []
+user_id: parth

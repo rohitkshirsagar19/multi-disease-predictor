@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/757149294987916155/6b0f4ce7f4b44034b355994d12d90e34/artifacts
+end_time: 1744534890865
+entry_point_name: ''
+experiment_id: '757149294987916155'
+lifecycle_stage: active
+run_id: 6b0f4ce7f4b44034b355994d12d90e34
+run_name: Random_Forest_Thyroid
+run_uuid: 6b0f4ce7f4b44034b355994d12d90e34
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744534888121
+status: 3
+tags: []
+user_id: parth

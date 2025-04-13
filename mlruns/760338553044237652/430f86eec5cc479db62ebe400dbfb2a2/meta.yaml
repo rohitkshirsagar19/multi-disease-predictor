@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/760338553044237652/430f86eec5cc479db62ebe400dbfb2a2/artifacts
+deleted_time: 1744535324658
 end_time: 1744533126352
 entry_point_name: ''
 experiment_id: '760338553044237652'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 430f86eec5cc479db62ebe400dbfb2a2
 run_name: Heart_Model_Comparison
 run_uuid: 430f86eec5cc479db62ebe400dbfb2a2

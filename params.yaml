@@ -106,6 +106,7 @@ Heart:
     artifacts_dir: multi-disease-predictor/mlartifacts
     experiment_name: "Heart_Disease_Experiment"
     run_name: "Heart_Model_Comparison"
+    registered_model_name: RandomForestClassifier
     remote_server_uri: "http://127.0.0.1:5000"
 
 

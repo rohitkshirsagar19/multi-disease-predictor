@@ -1,6 +1,7 @@
 import os
 import yaml
 import argparse
+from urllib.parse import urlparse
 import mlflow
 import joblib
 import pandas as pd
@@ -29,7 +30,6 @@ def train_and_evaluate(config_path):
     print("🔢 Extracting parameters...")
     random_state = config['base']['random_state']
     split_ratio = config['base']['split_ratio']
-    model_dir = config['Thyroid']['model_path']
     rf_params = config['Thyroid']['RandomForestClassifier']['params']
 
     print(f"📊 Splitting data (test size = {split_ratio})...")
@@ -68,18 +68,6 @@ def train_and_evaluate(config_path):
     print(f" Recall: {recall:.4f}")
     print(f" F1 Score: {f1:.4f}")
 
-    # Save the model
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
-        print(f"📁 Created model directory: {model_dir}")
-    else:
-        print(f"📁 Model directory already exists: {model_dir}")
-
-    model_path = os.path.join(model_dir, 'thyroid_model.pkl')
-    print("💾 Saving model...")
-    joblib.dump(rf, model_path)
-    print(f"✅ Model saved at {model_path}")
-
     # MLflow tracking
     print("📦 Setting up MLflow...")
     mlflow_config = config['Thyroid']['mlflow_config']
@@ -111,8 +99,13 @@ def train_and_evaluate(config_path):
             })
 
             print("📦 Logging model artifact to MLflow...")
-            mlflow.log_artifact(model_path, artifact_path="model")
-            print("✅ MLflow logging complete.")
+            tracking_uri_type = urlparse(mlflow.get_tracking_uri()).scheme
+            if tracking_uri_type != "file":
+                mlflow.sklearn.log_model(rf, "model", registered_model_name=mlflow_config["registered_model_name"])
+            else:
+                mlflow.sklearn.log_model(rf, "model")
+
+        print("✅ MLflow logging complete.")
     except Exception as e:
         print(f"❌ MLflow run failed: {e}")
 

@@ -25,6 +25,7 @@ def train_and_evaluate(config_path):
     print("📄 Reading dataset...")
     data_path = config['data_source']['Anemia']
     df = pd.read_csv(data_path, sep=',', encoding='utf-8')
+    df.drop(columns=['Unnamed: 0', 'index', 'S.No.'], inplace=True)
     print(f"✅ Data loaded from {data_path} with shape: {df.shape}")
 
     print("🔢 Extracting parameters...")

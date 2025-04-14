@@ -93,3 +93,6 @@ venv/
 
 # Mypy cache
 .mypy_cache/
+
+
+/test_features

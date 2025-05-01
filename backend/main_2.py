@@ -11,6 +11,8 @@ MODEL_PATHS = {
     "lung_cancer": "../models/lung_cancer.joblib/model.pkl",
     "hepatitis": "../models/hepatitis.joblib/hepatitis.joblib",
     "cardiovascular": "../models/cardiovascular.joblib/cardiovascular.joblib",
+    "liver": "../models/liver.joblib/liver.joblib",
+    "stroke": "../models/stroke.joblib/stroke.joblib",
     # Add more diseases here
 }
 
@@ -80,12 +82,39 @@ class CardiovascularInput(BaseModel):
     alco: float
     active: float
 
+class LiverInput(BaseModel):
+    Age : int  
+    Gender : int  
+    Total_Bilirubin : float
+    Direct_Bilirubin : float
+    Alkaline_Phosphotase : int 
+    Alamine_Aminotransferase : int 
+    Aspartate_Aminotransferase : int 
+    Total_Protiens : float
+    Albumin : float
+    Albumin_and_Globulin_Ratio : float
+
+class StrokeInput(BaseModel): 
+    gender : int
+    age : float
+    hypertension : int
+    heart_disease : int
+    ever_married : int
+    work_type : int
+    Residence_type : int
+    avg_glucose_level: float
+    bmi : float
+    smoking_status : int
+    
+
 # === MODEL-SCHEMA MAPPING ===
 model_input_schemas = {
     "anemia": AnemiaInput,
     "lung_cancer": LungCancerInput,
     "hepatitis": HepatitisInput,
     "cardiovascular": CardiovascularInput,
+    "liver": LiverInput,
+    "stroke" : StrokeInput,
 }
 
 # === API HOME ===

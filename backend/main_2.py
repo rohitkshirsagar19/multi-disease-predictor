@@ -11,6 +11,8 @@ MODEL_PATHS = {
     "lung_cancer": "../models/lung_cancer.joblib/model.pkl",
     "hepatitis": "../models/hepatitis.joblib/hepatitis.joblib",
     "cardiovascular": "../models/cardiovascular.joblib/cardiovascular.joblib",
+    "thyroid": "../models/thyroid_model/thyroid_model.joblib",   # Added thyroid
+    "heart": "../models/heart.joblib/heart_model.joblib",          # Added heart
     "liver": "../models/liver.joblib/liver.joblib",
     "stroke": "../models/stroke.joblib/stroke.joblib",
     # Add more diseases here
@@ -81,6 +83,51 @@ class CardiovascularInput(BaseModel):
     smoke: float
     alco: float
     active: float
+# Updated Heart Input based on cleaned_heart.csv (excluding target: HeartDisease)
+class HeartInput(BaseModel):
+    Age: float
+    Sex: float
+    RestingBP: float
+    Cholesterol: float
+    FastingBS: float
+    MaxHR: float
+    ExerciseAngina: float
+    Oldpeak: float
+    ChestPainType_ATA: float
+    ChestPainType_NAP: float
+    ChestPainType_TA: float
+    RestingECG_Normal: float
+    RestingECG_ST: float
+    ST_Slope_Flat: float
+    ST_Slope_Up: float
+
+# Thyroid input based on thyroid_cleaned_data.csv (excluding target columns such as Diagnosis, Thyroid_Cancer_Risk_Low, Thyroid_Cancer_Risk_Medium)
+class ThyroidInput(BaseModel):
+    Age: float
+    Gender: float
+    Family_History: float
+    Radiation_Exposure: float
+    Iodine_Deficiency: float
+    Smoking: float
+    Obesity: float
+    Diabetes: float
+    TSH_Level: float
+    T3_Level: float
+    T4_Level: float
+    Nodule_Size: float
+    Country_China: float
+    Country_Germany: float
+    Country_India: float
+    Country_Japan: float
+    Country_Nigeria: float
+    Country_Russia: float
+    Country_South_Korea: float
+    Country_UK: float
+    Country_USA: float
+    Ethnicity_Asian: float
+    Ethnicity_Caucasian: float
+    Ethnicity_Hispanic: float
+    Ethnicity_Middle_Eastern: float
 
 class LiverInput(BaseModel):
     Age : int  
@@ -113,6 +160,8 @@ model_input_schemas = {
     "lung_cancer": LungCancerInput,
     "hepatitis": HepatitisInput,
     "cardiovascular": CardiovascularInput,
+    "thyroid": ThyroidInput,  # Added mapping for thyroid endpoint
+    "heart": HeartInput       # Added mapping for heart endpoint
     "liver": LiverInput,
     "stroke" : StrokeInput,
 }
@@ -143,11 +192,10 @@ def predict_disease(disease_name: str, data: dict = Body(...)):
     # Convert to 2D list for model input
     features = [[value for value in validated_data.dict().values()]]
 
-    # Get prediction
-    prediction = model.predict(features)[0]  # This should now return 0, 1, 2, or 3
+    # Get prediction from the model
+    prediction = model.predict(features)[0]
 
     # Convert numpy.int64 to a native int
     prediction = int(prediction)
 
-    # Return the prediction as a number (0, 1, 2, or 3)
     return {"prediction": prediction}

@@ -161,7 +161,7 @@ model_input_schemas = {
     "hepatitis": HepatitisInput,
     "cardiovascular": CardiovascularInput,
     "thyroid": ThyroidInput,  # Added mapping for thyroid endpoint
-    "heart": HeartInput       # Added mapping for heart endpoint
+    "heart": HeartInput,       # Added mapping for heart endpoint
     "liver": LiverInput,
     "stroke" : StrokeInput,
 }

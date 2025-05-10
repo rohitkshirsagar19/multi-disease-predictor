@@ -1,4 +1,3 @@
-
 interface PredictionResponse {
   prediction: number;
 }
@@ -10,6 +9,7 @@ export const fetchPrediction = async (
   formData: Record<string, number>
 ): Promise<number> => {
   try {
+    // === 1. Get prediction
     const response = await fetch(`${API_BASE_URL}/predict/${disease}`, {
       method: "POST",
       headers: {
@@ -25,7 +25,17 @@ export const fetchPrediction = async (
       );
     }
 
-    const data = await response.json() as PredictionResponse;
+    const data = (await response.json()) as PredictionResponse;
+
+    // === 2. Submit data for retraining
+    await fetch(`${API_BASE_URL}/submit_data/${disease}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
     return data.prediction;
   } catch (error) {
     if (error instanceof Error) {

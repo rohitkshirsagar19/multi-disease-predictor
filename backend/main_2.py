@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
 import joblib
 import os
+import pandas as pd
+from retrain import retrain_model
 
 app = FastAPI()
 
@@ -213,3 +215,52 @@ def predict_disease(disease_name: str, data: dict = Body(...)):
     prediction = int(prediction)
 
     return {"prediction": prediction}
+
+
+@app.post("/submit_data/{disease_name}")
+def submit_user_data(disease_name: str, data: dict = Body(...)):
+    schema = model_input_schemas.get(disease_name)
+
+    if not schema:
+        raise HTTPException(status_code=400, detail="Schema not defined for this disease")
+
+    try:
+        validated_data = schema(**data)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid input data: {str(e)}")
+
+    df = pd.DataFrame([validated_data.dict()])
+
+    # Predict using the model
+    model = models.get(disease_name)
+    if model is None:
+        raise HTTPException(status_code=404, detail="Model not found")
+
+    features = [[value for value in validated_data.dict().values()]]
+    prediction = model.predict(features)[0]
+
+    # Add prediction as target column (adjust column name if needed)
+    df["target"] = int(prediction)
+
+    # Save to CSV
+    os.makedirs("user_data", exist_ok=True)
+    file_path = f"user_data/{disease_name}.csv"
+
+    if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+        df.to_csv(file_path, mode='a', header=False, index=False)
+    else:
+        df.to_csv(file_path, mode='w', header=True, index=False)
+
+
+    return {
+        "message": "User data and prediction saved for retraining.",
+        "prediction": int(prediction)
+    }
+
+
+# === RETRAINING ROUTE ===
+@app.post("/retrain/{disease_name}")
+def retrain_route(disease_name: str):
+    return retrain_model(disease_name, model_input_schemas, MODEL_PATHS, models)
+
+

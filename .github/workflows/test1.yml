@@ -28,5 +28,4 @@ jobs:
     # Optional: Add tests
     - name: Run tests
       run: |
-        echo "Add pytest or other tests here"
-
+        pytest tests/

@@ -7,7 +7,7 @@ app = FastAPI()
 
 # === MODEL PATHS ===
 MODEL_PATHS = {
-    "anemia": "../models/anemia.joblib/model.pkl",
+    "anemia": "../models/stroke.joblib/anemia.joblib/model.pkl",
     "lung_cancer": "../models/lung_cancer.joblib/model.pkl",
     "hepatitis": "../models/hepatitis.joblib/hepatitis.joblib",
     "cardiovascular": "../models/cardiovascular.joblib/cardiovascular.joblib",
@@ -17,6 +17,20 @@ MODEL_PATHS = {
     "stroke": "../models/stroke.joblib/stroke.joblib",
     # Add more diseases here
 }
+
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8080"],  # Adjust to match your frontend's URL
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods (GET, POST, OPTIONS, etc.)
+    allow_headers=["*"],  # Allow all headers
+)
+
 
 # === LOAD MODELS ===
 models = {}

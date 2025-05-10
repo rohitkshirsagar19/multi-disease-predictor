@@ -18,7 +18,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 # If main_2.py is in 'backend/', and models are in 'models/' at the project root,
 # then '../models/' relative to SCRIPT_DIR will correctly point to project_root/models/.
 MODEL_PATHS = {
-    "anemia": os.path.join(SCRIPT_DIR, "../models/stroke.joblib/anemia.joblib/model.pkl"),
+    "anemia": os.path.join(SCRIPT_DIR, "../models/anemia.joblib/model.pkl"),
     "lung_cancer": os.path.join(SCRIPT_DIR, "../models/lung_cancer.joblib/model.pkl"),
     "hepatitis": os.path.join(SCRIPT_DIR, "../models/hepatitis.joblib/hepatitis.joblib"),
     "cardiovascular": os.path.join(SCRIPT_DIR, "../models/cardiovascular.joblib/cardiovascular.joblib"),

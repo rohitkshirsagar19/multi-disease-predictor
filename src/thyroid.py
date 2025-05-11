@@ -1,131 +1,107 @@
 import os
 import yaml
 import argparse
-from urllib.parse import urlparse
-import mlflow
 import joblib
 import pandas as pd
+import mlflow
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
 
-def read_param(config_path):
-    print("🔧 Loading configuration...")
-    print(f"Reading configuration from: {config_path}")
-    with open(config_path) as yaml_file:
-        config = yaml.safe_load(yaml_file)
-    print("✅ Configuration loaded successfully.")
-    return config
+def read_params(path):
+    with open(path) as f:
+        return yaml.safe_load(f)
 
 
 def train_and_evaluate(config_path):
-    config = read_param(config_path)
+    # Load configuration
+    print("Reading configuration...")
+    cfg = read_params(config_path)
+    print("Configuration loaded.")
 
-    print("📄 Reading dataset...")
-    data_path = config['data_source']['Thyroid']
-    df = pd.read_csv(data_path, sep=',', encoding='utf-8')
-    print(f"✅ Data loaded from {data_path} with shape: {df.shape}")
-
-    print("🔢 Extracting parameters...")
-    random_state = config['base']['random_state']
-    split_ratio = config['base']['split_ratio']
-    rf_params = config['Thyroid']['RandomForestClassifier']['params']
-    model_dir = config['Thyroid']['model_path']
-
-    print(f"📊 Splitting data (test size = {split_ratio})...")
-    features = df.drop(columns=['Diagnosis'], axis=1)
-    target = df['Diagnosis']
-    X_train, X_test, y_train, y_test = train_test_split(
-        features,
-        target,
-        test_size=split_ratio,
-        random_state=random_state
-    )
-    print(f"✅ Data split: Train = {X_train.shape}, Test = {X_test.shape}")
-
-    print("🌲 Initializing Random Forest Classifier...")
-    rf = RandomForestClassifier(
-        max_depth=rf_params['max_depth'],
-        min_samples_leaf=rf_params['min_samples_leaf'],
-        min_samples_split=rf_params['min_samples_split'],
-        n_estimators=rf_params['n_estimators']
-    )
-
-    print("🧠 Training model...")
-    rf.fit(X_train, y_train)
-    print("✅ Model training complete.")
-
-    print("🔍 Predicting and evaluating...")
-    y_pred = rf.predict(X_test)
-    accuracy = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred, average='weighted')
-    recall = recall_score(y_test, y_pred, average='weighted')
-    f1 = f1_score(y_test, y_pred, average='weighted')
-
-    print("📈 Metrics:")
-    print(f" Accuracy: {accuracy:.4f}")
-    print(f" Precision: {precision:.4f}")
-    print(f" Recall: {recall:.4f}")
-    print(f" F1 Score: {f1:.4f}")
-    model_dir = config['Thyroid']['model_dir']
-
+    # Load data
+    print(f"Loading dataset from {cfg['data_source']['Thyroid']}...")
+    df1 = pd.read_csv(cfg['data_source']['Thyroid'])
     
-
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
-        print(f"📁 Created model directory: {model_dir}")
+    # Check class distribution
+    print("\nClass distribution in Diagnosis column:")
+    class_counts = df1[cfg['Thyroid']['target_column']].value_counts()
+    total_samples = len(df1)
+    for label, count in class_counts.items():
+        proportion = count / total_samples * 100
+        print(f"Class {label}: {count} samples ({proportion:.2f}%)")
+    
+    # Check for imbalance
+    imbalance_ratio = class_counts.max() / class_counts.min()
+    print(f"Imbalance ratio (majority/minority): {imbalance_ratio:.2f}")
+    if imbalance_ratio > 2:
+        print("Warning: Dataset is imbalanced (ratio > 2). Consider techniques like oversampling, undersampling, or class weights.")
     else:
-        print(f"📁 Model directory already exists: {model_dir}")
+        print("Dataset is balanced or mildly imbalanced (ratio <= 2).")
 
+    X = df1.drop(columns=[cfg['Thyroid']['target_column']])
+    y = df1[cfg['Thyroid']['target_column']]
+
+    # Split into training and test sets (80% train, 20% test)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=cfg['base']['random_state'])
+
+    # Train Random Forest Classifier
+    rf_model = RandomForestClassifier(
+        n_estimators=cfg['Thyroid']['RandomForestClassifier']['n_estimators'],
+        max_depth=cfg['Thyroid']['RandomForestClassifier']['max_depth'],
+        min_samples_split=cfg['Thyroid']['RandomForestClassifier']['min_samples_split'],
+        min_samples_leaf=cfg['Thyroid']['RandomForestClassifier']['min_samples_leaf'],
+        random_state=cfg['Thyroid']['RandomForestClassifier']['random_state_thyroid']
+    )
+    rf_model.fit(X_train, y_train)
+    
+    # Save model
+    model_dir = cfg['Thyroid']['model_dir']
+    os.makedirs(model_dir, exist_ok=True)
     model_path = os.path.join(model_dir, 'thyroid_model.joblib')
-    joblib.dump(rf, model_path)
-    print(f"✅ Model saved at {model_path}")
+    joblib.dump(rf_model, model_path, compress=9)
+    print(f"Model saved to {model_path}")
+    print(f"Model size: {os.path.getsize(model_path) / (1024 * 1024):.2f} MB")
 
-    # MLflow tracking
-    print("📦 Setting up MLflow...")
-    mlflow_config = config['Thyroid']['mlflow_config']
-    experiment_name = mlflow_config['experiment_name']
-    run_name = mlflow_config['run_name']
-    remote_uri = mlflow_config['remote_server_uri']
+    # Predict on test set
+    y_pred = rf_model.predict(X_test)
 
-    print(f"🔗 MLflow Tracking URI: {remote_uri}")
-    print(f"🧪 Experiment Name: {experiment_name}")
-    print(f"🏷️ Run Name: {run_name}")
+    # Calculate and print evaluation metrics
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Test Set Accuracy: {accuracy:.4f}")
+    print("Classification Report:\n", classification_report(y_test, y_pred))
+    print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+    print(f"Precision: {precision_score(y_test, y_pred, average='weighted'):.4f}")
+    print(f"Recall: {recall_score(y_test, y_pred, average='weighted'):.4f}")
+    print(f"F1 Score: {f1_score(y_test, y_pred, average='weighted'):.4f}")
 
-    mlflow.set_tracking_uri(remote_uri)
-
-    try:
-        mlflow.set_experiment(experiment_name)
-    except Exception as e:
-        print(f"⚠️ Failed to set experiment: {e}")
-
-    print("🚀 Starting MLflow run...")
-    try:
-        with mlflow.start_run(run_name=run_name):
-            # Logging params and metrics
-            mlflow.log_params(rf_params)
-            mlflow.log_metrics({
-                'accuracy': accuracy,
-                'precision': precision,
-                'recall': recall,
-                'f1_score': f1
-            })
-
-            print("📦 Logging model artifact to MLflow...")
-            tracking_uri_type = urlparse(mlflow.get_tracking_uri()).scheme
-            if tracking_uri_type != "file":
-                mlflow.sklearn.log_model(rf, "model", registered_model_name=mlflow_config["registered_model_name"])
-            else:
-                mlflow.sklearn.log_model(rf, "model")
-
-        print("✅ MLflow logging complete.")
-    except Exception as e:
-        print(f"❌ MLflow run failed: {e}")
+    # MLflow logging
+    print("Logging to MLflow...")
+    mlflow.set_tracking_uri(cfg['Thyroid']['mlflow_config']['remote_server_uri'])
+    mlflow.set_experiment(cfg['Thyroid']['mlflow_config']['experiment_name'])
+    with mlflow.start_run(run_name=cfg['Thyroid']['mlflow_config']['run_name']):
+        mlflow.log_params({
+            'split_ratio': cfg['base']['split_ratio'],
+            'random_state': cfg['Thyroid']['RandomForestClassifier']['random_state_thyroid'],
+            'n_estimators': cfg['Thyroid']['RandomForestClassifier']['n_estimators'],
+            'max_depth': cfg['Thyroid']['RandomForestClassifier']['max_depth'],
+            'min_samples_split': cfg['Thyroid']['RandomForestClassifier']['min_samples_split'],
+            'min_samples_leaf': cfg['Thyroid']['RandomForestClassifier']['min_samples_leaf']
+        })
+        mlflow.log_metrics({
+            'accuracy': accuracy_score(y_test, y_pred),
+            'precision': precision_score(y_test, y_pred, average='weighted'),
+            'recall': recall_score(y_test, y_pred, average='weighted'),
+            'f1_score': f1_score(y_test, y_pred, average='weighted')
+        })
+        mlflow.sklearn.log_model(rf_model, "model")
+    print("MLflow logging complete.")
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Train and evaluate a Random Forest model for Thyroid Disease.')
-    parser.add_argument('--config', default='params.yaml', type=str, help='Path to the config file.')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', default='params.yaml', help='Path to config file')
     args = parser.parse_args()
     train_and_evaluate(args.config)

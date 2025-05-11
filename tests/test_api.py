@@ -44,6 +44,46 @@ def test_predict_anemia():
     assert response.status_code == 200
     assert "prediction" in response.json()
 
+def test_predict_heart():
+    payload = {
+        "Age": 50,
+        "Sex": 1,
+        "RestingBP": 120,
+        "Cholesterol": 200,
+        "FastingBS": 0,
+        "MaxHR": 150,
+        "ExerciseAngina": 0,
+        "Oldpeak": 1.5,
+        "ChestPainType_ATA": 1,
+        "ChestPainType_NAP": 0,
+        "ChestPainType_TA": 0,
+        "RestingECG_Normal": 1,
+        "RestingECG_ST": 0,
+        "ST_Slope_Flat": 0,
+        "ST_Slope_Up": 1
+    }
+    response = client.post("/predict/heart", json=payload)
+    assert response.status_code == 200
+    assert "prediction" in response.json()
+
+def test_predict_thyroid():
+    payload = {
+        "Age": 45,
+        "Gender": 1,
+        "Family_History": 1,
+        "Radiation_Exposure": 0,
+        "Iodine_Deficiency": 0,
+        "Smoking": 0,
+        "Obesity": 0,
+        "Diabetes": 0,
+        "TSH_Level": 2.5,
+        "T3_Level": 1.2,
+        "T4_Level": 8.0,
+        "Nodule_Size": 0.0
+    }
+    response = client.post("/predict/thyroid", json=payload)
+    assert response.status_code == 200
+    assert "prediction" in response.json()
 def test_predict_lung_cancer():
     payload = {
         "GENDER": 1,
@@ -82,28 +122,6 @@ def test_predict_hepatitis():
         "PROT": 7.2
     }
     response = client.post("/predict/hepatitis", json=payload)
-    assert response.status_code == 200
-    assert "prediction" in response.json()
-
-def test_predict_heart():
-    payload = {
-        "Age": 58,
-        "Sex": 1,
-        "RestingBP": 130,
-        "Cholesterol": 220,
-        "FastingBS": 0,
-        "MaxHR": 140,
-        "ExerciseAngina": 1,
-        "Oldpeak": 1.0,
-        "ChestPainType_ATA": 0,
-        "ChestPainType_NAP": 1,
-        "ChestPainType_TA": 0,
-        "RestingECG_Normal": 1,
-        "RestingECG_ST": 0,
-        "ST_Slope_Flat": 1,
-        "ST_Slope_Up": 0
-    }
-    response = client.post("/predict/heart", json=payload)
     assert response.status_code == 200
     assert "prediction" in response.json()
 

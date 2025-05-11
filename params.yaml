@@ -1,139 +1,141 @@
-base:
-  project: multi-disease-predictor
-  random_state: 20
-  split_ratio: 0.25
+  base:
+    project: multi-disease-predictor
+    random_state: 20
+    split_ratio: 0.25
 
-data_source:
-  Anemia: data/processed/Anemia.csv
-  Cardiovascular: data/processed/Cardiovascular.csv
-  Heart: data/processed/cleaned_heart.csv
-  Hepatitis_C: data/processed/Hepatitis_C.csv
-  Lung_cancer: data/processed/lung_cancer_processed.csv
-  Thyroid: data/processed/thyroid_cleaned_data.csv
-  Stroke: data/processed/processed_healthcare_data.csv
-  Liver: data/processed/indian_liver_patient_processed.csv  
+  data_source:
+    Anemia: data/processed/Anemia.csv
+    Cardiovascular: data/processed/Cardiovascular.csv
+    Heart: data/processed/cleaned_heart.csv
+    Hepatitis_C: data/processed/Hepatitis_C.csv
+    Lung_cancer: data/processed/lung_cancer_processed.csv
+    Thyroid: data/processed/thyroid_cleaned_data.csv
+    Stroke: data/processed/processed_healthcare_data.csv
+    Liver: data/processed/indian_liver_patient_processed.csv  
 
-Hepatitis_C:
-  SVC:
-    params:
-      C: 10
-      gamma: scale
-      kernel: rbf
-  model_path: models/hepatitis.joblib
-  mlflow_config:
-    artifacts_dir: artifacts
-    experiment_name: Hepatitis_C
-    run_name: test2
-    registered_model_name: SVC
-    remote_server_uri: http://127.0.0.1:5000
+  Hepatitis_C:
+    SVC:
+      params:
+        C: 10
+        gamma: scale
+        kernel: rbf
+    model_path: models/hepatitis.joblib
+    mlflow_config:
+      artifacts_dir: artifacts
+      experiment_name: Hepatitis_C
+      run_name: test2
+      registered_model_name: SVC
+      remote_server_uri: http://127.0.0.1:5000
 
 
-Liver:
-  RandomForestClassifier:
-    params:
-      n_estimators: 5
-      min_sample_split: 2
-  model_path: models/liver.joblib
-  mlflow_config:
-    artifacts_dir: artifacts
-    experiment_name: liver
-    run_name: test1
-    registered_model_name: RandomForestClassifier
-    remote_server_uri: http://127.0.0.1:5000
+  Liver:
+    RandomForestClassifier:
+      params:
+        n_estimators: 5
+        min_sample_split: 2
+    model_path: models/liver.joblib
+    mlflow_config:
+      artifacts_dir: artifacts
+      experiment_name: liver
+      run_name: test1
+      registered_model_name: RandomForestClassifier
+      remote_server_uri: http://127.0.0.1:5000
 
-Stroke:
-  RandomForestClassifier:
-    params:
-      n_estimators: 10
-      max_depth: 5
-  model_path: models/stroke.joblib
-  mlflow_config:
-    artifacts_dir: artifacts
-    experiment_name: stroke
-    run_name: test2
-    registered_model_name: RandomForestClassifier
-    remote_server_uri: http://127.0.0.1:5000
+  Stroke:
+    RandomForestClassifier:
+      params:
+        n_estimators: 10
+        max_depth: 5
+    model_path: models/stroke.joblib
+    mlflow_config:
+      artifacts_dir: artifacts
+      experiment_name: stroke
+      run_name: test2
+      registered_model_name: RandomForestClassifier
+      remote_server_uri: http://127.0.0.1:5000
 
-Cardiovascular:
-  RandomForestClassifier :
-    params:
+  Cardiovascular:
+    RandomForestClassifier :
+      params:
+        max_depth: 10
+        min_samples_leaf: 2
+        min_samples_split: 2
+        n_estimators: 100
+    model_path: models/cardiovascular.joblib
+    mlflow_config:
+      artifacts_dir: artifacts
+      experiment_name: Cardiovascular
+      run_name: test1
+      registered_model_name: RandomForestClassifier
+      remote_server_uri: http://127.0.0.1:5000
+
+
+  Anemia:
+    RandomForestClassifier :
+      params:
+        max_depth: 10
+        min_samples_leaf: 2
+        min_samples_split: 2
+        n_estimators: 100
+    model_path: models/anemia.joblib
+    mlflow_config:
+      artifacts_dir: artifacts
+      experiment_name: Anemia
+      run_name: anemia
+      registered_model_name: RandomForestClassifier
+      remote_server_uri: http://127.0.0.1:5000
+
+  lung_cancer:
+    LogisticRegression :
+      params:
+        C: 0.1
+        max_iter: 100
+        penalty: l2
+        solver: liblinear
+
+
+  Thyroid:
+    model_path: models/thyroid.joblib
+    model_dir: models/thyroid_model
+    RandomForestClassifier:
+      random_state_thyroid: 42
+      n_estimators: 50
       max_depth: 10
-      min_samples_leaf: 2
-      min_samples_split: 2
-      n_estimators: 100
-  model_path: models/cardiovascular.joblib
-  mlflow_config:
-    artifacts_dir: artifacts
-    experiment_name: Cardiovascular
-    run_name: test1
-    registered_model_name: RandomForestClassifier
-    remote_server_uri: http://127.0.0.1:5000
+      min_samples_split: 10
+      min_samples_leaf: 5
+    target_column: Diagnosis    
+    mlflow_config:
+      artifacts_dir: artifacts
+      experiment_name: "Thyroid_Disease_Experiment"
+      run_name: "Random_Forest_Thyroid"
+      registered_model_name: RandomForestClassifier
+      remote_server_uri: "http://127.0.0.1:5000"
 
+      
+  Heart:
+    model_path: models/heart.joblib
 
-Anemia:
-  RandomForestClassifier :
-    params:
-      max_depth: 10
-      min_samples_leaf: 2
-      min_samples_split: 2
-      n_estimators: 100
-  model_path: models/anemia.joblib
-  mlflow_config:
-    artifacts_dir: artifacts
-    experiment_name: Anemia
-    run_name: anemia
-    registered_model_name: RandomForestClassifier
-    remote_server_uri: http://127.0.0.1:5000
+    RandomForestClassifier:
+      params:
+        n_estimators: 100
+        max_depth: 10
+        min_samples_split: 2
+        min_samples_leaf: 1
 
-lung_cancer:
-  LogisticRegression :
-    params:
-      C: 0.1
-      max_iter: 100
-      penalty: l2
-      solver: liblinear
-
-
-Thyroid:
-  model_path: models/thyroid.joblib
-  model_dir: models/thyroid_model
-  RandomForestClassifier:
-    params:
-      n_estimators: 100
-      max_depth: 10
-      min_samples_split: 2
-      min_samples_leaf: 1
-  mlflow_config:
-    artifacts_dir: artifacts
-    experiment_name: "Thyroid_Disease_Experiment"
-    run_name: "Random_Forest_Thyroid"
-    registered_model_name: RandomForestClassifier
-    remote_server_uri: "http://127.0.0.1:5000"
-
-Heart:
-  model_path: models/heart.joblib
-
-  RandomForestClassifier:
-    params:
-      n_estimators: 100
-      max_depth: 10
-      min_samples_split: 2
-      min_samples_leaf: 1
-
-  mlflow_config:
-    artifacts_dir: multi-disease-predictor/mlartifacts
-    experiment_name: "Heart_Disease_Experiment"
-    run_name: "Heart_Model_Comparison"
-    registered_model_name: RandomForestClassifier
-    remote_server_uri: "http://127.0.0.1:5000"
+    mlflow_config:
+      artifacts_dir: multi-disease-predictor/mlartifacts
+      experiment_name: "Heart_Disease_Experiment"
+      run_name: "Heart_Model_Comparison"
+      registered_model_name: RandomForestClassifier
+      remote_server_uri: "http://127.0.0.1:5000"
 
 
 
 
 
-# mlflow_config:
-#   artifacts_dir: artifacts
-#   experiment_name: hepatitis
-#   run_name: liver
-#   registered_model_name: RandomForestClassifier
-#   remote_server_uri: http://127.0.0.1:5000
+  # mlflow_config:
+  #   artifacts_dir: artifacts
+  #   experiment_name: hepatitis
+  #   run_name: liver
+  #   registered_model_name: RandomForestClassifier
+  #   remote_server_uri: http://127.0.0.1:5000

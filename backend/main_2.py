@@ -9,7 +9,7 @@ app = FastAPI()
 
 # === MODEL PATHS ===
 MODEL_PATHS = {
-    "anemia": "../models/stroke.joblib/anemia.joblib/model.pkl",
+    "anemia": "../models/anemia.joblib/model.pkl",
     "lung_cancer": "../models/lung_cancer.joblib/model.pkl",
     "hepatitis": "../models/hepatitis.joblib/hepatitis.joblib",
     "cardiovascular": "../models/cardiovascular.joblib/cardiovascular.joblib",

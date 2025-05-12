@@ -131,19 +131,6 @@ class ThyroidInput(BaseModel):
     T3_Level: float
     T4_Level: float
     Nodule_Size: float
-    Country_China: float
-    Country_Germany: float
-    Country_India: float
-    Country_Japan: float
-    Country_Nigeria: float
-    Country_Russia: float
-    Country_South_Korea: float
-    Country_UK: float
-    Country_USA: float
-    Ethnicity_Asian: float
-    Ethnicity_Caucasian: float
-    Ethnicity_Hispanic: float
-    Ethnicity_Middle_Eastern: float
 
 class LiverInput(BaseModel):
     Age : int  

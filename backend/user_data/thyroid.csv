@@ -1,0 +1,2 @@
+Age,Gender,Family_History,Radiation_Exposure,Iodine_Deficiency,Smoking,Obesity,Diabetes,TSH_Level,T3_Level,T4_Level,Nodule_Size,target
+41.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,231.0,32.0,53.0,23.0,0

@@ -1,4 +1,3 @@
-
 export type InputField = {
   label: string;
   field: string;
@@ -88,17 +87,16 @@ export const diseaseInputs: DiseaseInputs = {
     fields: [
       { label: "Age", field: "Age", placeholder: "Enter age in years" },
       { label: "Gender", field: "Gender", placeholder: "0 = male, 1 = female", tooltip: "Enter 0 for male, 1 for female" },
-      { label: "Country_China", field: "Country_China", placeholder: "1 if China, 0 otherwise", tooltip: "Enter 1 if China, 0 otherwise" },
-      { label: "Country_Germany", field: "Country_Germany", placeholder: "1 if Germany, 0 otherwise", tooltip: "Enter 1 if Germany, 0 otherwise" },
-      { label: "Country_India", field: "Country_India", placeholder: "1 if India, 0 otherwise", tooltip: "Enter 1 if India, 0 otherwise" },
-      { label: "Country_Luxembourg", field: "Country_Luxembourg", placeholder: "1 if Luxembourg, 0 otherwise", tooltip: "Enter 1 if Luxembourg, 0 otherwise" },
-      { label: "Country_South_Africa", field: "Country_South_Africa", placeholder: "1 if South Africa, 0 otherwise", tooltip: "Enter 1 if South Africa, 0 otherwise" },
-      { label: "Country_USA", field: "Country_USA", placeholder: "1 if USA, 0 otherwise", tooltip: "Enter 1 if USA, 0 otherwise" },
-      { label: "TSH", field: "TSH", placeholder: "Thyroid-stimulating hormone level" },
-      { label: "T3", field: "T3", placeholder: "Triiodothyronine level" },
-      { label: "TT4", field: "TT4", placeholder: "Total thyroxine level" },
-      { label: "T4U", field: "T4U", placeholder: "Thyroxine uptake" },
-      { label: "FTI", field: "FTI", placeholder: "Free Thyroxine Index" },
+      { label: "Family History", field: "Family_History", placeholder: "0 = no, 1 = yes", tooltip: "Do you have a family history of thyroid disorders?" },
+      { label: "Radiation Exposure", field: "Radiation_Exposure", placeholder: "0 = no, 1 = yes", tooltip: "Have you been exposed to radiation?" },
+      { label: "Iodine Deficiency", field: "Iodine_Deficiency", placeholder: "0 = no, 1 = yes", tooltip: "Do you have iodine deficiency?" },
+      { label: "Smoking", field: "Smoking", placeholder: "0 = no, 1 = yes", tooltip: "Do you smoke?" },
+      { label: "Obesity", field: "Obesity", placeholder: "0 = no, 1 = yes", tooltip: "Are you obese?" },
+      { label: "Diabetes", field: "Diabetes", placeholder: "0 = no, 1 = yes", tooltip: "Do you have diabetes?" },
+      { label: "TSH Level", field: "TSH_Level", placeholder: "Thyroid-stimulating hormone level", tooltip: "Enter your TSH level" },
+      { label: "T3 Level", field: "T3_Level", placeholder: "Triiodothyronine level", tooltip: "Enter your T3 level" },
+      { label: "T4 Level", field: "T4_Level", placeholder: "Total thyroxine level", tooltip: "Enter your T4 level" },
+      { label: "Nodule Size", field: "Nodule_Size", placeholder: "Size in mm", tooltip: "Enter the size of thyroid nodule (if any) in mm" }
     ]
   },
   heart: {
@@ -108,17 +106,17 @@ export const diseaseInputs: DiseaseInputs = {
       { label: "Sex", field: "Sex", placeholder: "0 = female, 1 = male", tooltip: "Enter 0 for female, 1 for male" },
       { label: "RestingBP", field: "RestingBP", placeholder: "Resting blood pressure (mm Hg)" },
       { label: "Cholesterol", field: "Cholesterol", placeholder: "Serum cholesterol (mg/dl)" },
+      { label: "FastingBS", field: "FastingBS", placeholder: "0 = no, 1 = yes", tooltip: "Fasting blood sugar > 120 mg/dl: 1 if yes, 0 if no" },
+      { label: "MaxHR", field: "MaxHR", placeholder: "Maximum heart rate achieved" },
+      { label: "ExerciseAngina", field: "ExerciseAngina", placeholder: "0 = no, 1 = yes", tooltip: "Exercise-induced angina: 1 if yes, 0 if no" },
+      { label: "Oldpeak", field: "Oldpeak", placeholder: "ST depression induced by exercise" },
       { label: "ChestPainType_ATA", field: "ChestPainType_ATA", placeholder: "1 if ATA, 0 otherwise", tooltip: "Atypical Angina: 1 if present, 0 if not" },
       { label: "ChestPainType_NAP", field: "ChestPainType_NAP", placeholder: "1 if NAP, 0 otherwise", tooltip: "Non-Anginal Pain: 1 if present, 0 if not" },
       { label: "ChestPainType_TA", field: "ChestPainType_TA", placeholder: "1 if TA, 0 otherwise", tooltip: "Typical Angina: 1 if present, 0 if not" },
-      { label: "ExerciseAngina_Y", field: "ExerciseAngina_Y", placeholder: "1 if yes, 0 if no", tooltip: "Exercise-Induced Angina: 1 if yes, 0 if no" },
-      { label: "FastingBS", field: "FastingBS", placeholder: "1 if >120 mg/dl, 0 otherwise", tooltip: "Fasting blood sugar: 1 if >120 mg/dl, 0 if not" },
-      { label: "MaxHR", field: "MaxHR", placeholder: "Maximum heart rate achieved" },
-      { label: "Oldpeak", field: "Oldpeak", placeholder: "ST depression induced by exercise" },
       { label: "RestingECG_Normal", field: "RestingECG_Normal", placeholder: "1 if normal, 0 otherwise", tooltip: "Normal resting ECG: 1 if normal, 0 if not" },
       { label: "RestingECG_ST", field: "RestingECG_ST", placeholder: "1 if ST abnormality, 0 otherwise", tooltip: "ST-T wave abnormality: 1 if present, 0 if not" },
       { label: "ST_Slope_Flat", field: "ST_Slope_Flat", placeholder: "1 if flat, 0 otherwise", tooltip: "ST slope flat: 1 if yes, 0 if no" },
-      { label: "ST_Slope_Up", field: "ST_Slope_Up", placeholder: "1 if upsloping, 0 otherwise", tooltip: "ST slope upsloping: 1 if yes, 0 if no" },
+      { label: "ST_Slope_Up", field: "ST_Slope_Up", placeholder: "1 if upsloping, 0 otherwise", tooltip: "ST slope upsloping: 1 if yes, 0 if no" }
     ]
   },
   liver: {
@@ -139,21 +137,64 @@ export const diseaseInputs: DiseaseInputs = {
   stroke: {
     displayName: "Stroke",
     fields: [
-      { label: "gender", field: "gender", placeholder: "0 = female, 1 = male", tooltip: "Enter 0 for female, 1 for male" },
-      { label: "age", field: "age", placeholder: "Enter age in years" },
-      { label: "hypertension", field: "hypertension", placeholder: "0 = no, 1 = yes", tooltip: "Enter 1 if yes, 0 if no" },
-      { label: "heart_disease", field: "heart_disease", placeholder: "0 = no, 1 = yes", tooltip: "Enter 1 if yes, 0 if no" },
-      { label: "ever_married", field: "ever_married", placeholder: "0 = no, 1 = yes", tooltip: "Enter 1 if yes, 0 if no" },
-      { label: "work_type_Govt_job", field: "work_type_Govt_job", placeholder: "1 if govt job, 0 otherwise", tooltip: "1 if government job, 0 otherwise" },
-      { label: "work_type_Never_worked", field: "work_type_Never_worked", placeholder: "1 if never worked, 0 otherwise", tooltip: "1 if never worked, 0 otherwise" },
-      { label: "work_type_Private", field: "work_type_Private", placeholder: "1 if private job, 0 otherwise", tooltip: "1 if private job, 0 otherwise" },
-      { label: "work_type_Self_employed", field: "work_type_Self_employed", placeholder: "1 if self-employed, 0 otherwise", tooltip: "1 if self-employed, 0 otherwise" },
-      { label: "residence_type", field: "residence_type", placeholder: "0 = rural, 1 = urban", tooltip: "Enter 0 for rural, 1 for urban" },
-      { label: "avg_glucose_level", field: "avg_glucose_level", placeholder: "Average glucose level" },
-      { label: "bmi", field: "bmi", placeholder: "Body Mass Index" },
-      { label: "smoking_status_formerly_smoked", field: "smoking_status_formerly_smoked", placeholder: "1 if formerly smoked, 0 otherwise", tooltip: "1 if formerly smoked, 0 otherwise" },
-      { label: "smoking_status_never_smoked", field: "smoking_status_never_smoked", placeholder: "1 if never smoked, 0 otherwise", tooltip: "1 if never smoked, 0 otherwise" },
-      { label: "smoking_status_smokes", field: "smoking_status_smokes", placeholder: "1 if currently smokes, 0 otherwise", tooltip: "1 if currently smokes, 0 otherwise" },
+      {
+        label: "Gender",
+        field: "gender",
+        placeholder: "0 = female, 1 = male",
+        tooltip: "Enter 0 for female, 1 for male"
+      },
+      {
+        label: "Age",
+        field: "age",
+        placeholder: "Enter age in years"
+      },
+      {
+        label: "Hypertension",
+        field: "hypertension",
+        placeholder: "0 = no, 1 = yes",
+        tooltip: "Enter 1 if yes, 0 if no"
+      },
+      {
+        label: "Heart Disease",
+        field: "heart_disease",
+        placeholder: "0 = no, 1 = yes",
+        tooltip: "Enter 1 if yes, 0 if no"
+      },
+      {
+        label: "Ever Married",
+        field: "ever_married",
+        placeholder: "0 = no, 1 = yes",
+        tooltip: "Enter 1 if yes, 0 if no"
+      },
+      {
+        label: "Work Type",
+        field: "work_type",
+        placeholder: "0 = Govt job, 1 = Never worked, 2 = Private, 3 = Self-employed, 4 = Children",
+        tooltip: "Choose one: 0=Govt, 1=Never worked, 2=Private, 3=Self-employed, 4=Children"
+      },
+      {
+        label: "Residence Type",
+        field: "Residence_type",  // <-- must match exactly!
+        placeholder: "0 = rural, 1 = urban",
+        tooltip: "Enter 0 for rural, 1 for urban"
+      },
+      {
+        label: "Average Glucose Level",
+        field: "avg_glucose_level",
+        placeholder: "Enter average glucose level"
+      },
+      {
+        label: "BMI",
+        field: "bmi",
+        placeholder: "Enter Body Mass Index"
+      },
+      {
+        label: "Smoking Status",
+        field: "smoking_status",
+        placeholder: "0 = formerly smoked, 1 = never smoked, 2 = smokes, 3 = unknown",
+        tooltip: "Choose one: 0=formerly smoked, 1=never smoked, 2=smokes, 3=unknown"
+      }
     ]
   }
+
 };

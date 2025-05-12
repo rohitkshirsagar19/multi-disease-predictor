@@ -15,11 +15,10 @@ import {
     Cigarette,
     CigaretteOff,
     Brain,
-    BrainOff,
     Droplet,
-    DropletOff,
     Pill,
-    PillOff
+    Globe,
+    ActivitySquare
 } from "lucide-react";
 
 interface ThyroidFormProps {
@@ -49,47 +48,51 @@ const ThyroidForm: React.FC<ThyroidFormProps> = ({
             },
             Gender: {
                 icon: Users,
-                tooltip: "Select your gender"
+                tooltip: "Select your gender (0 = male, 1 = female)"
             },
-            Family_History: {
-                icon: Users,
-                tooltip: "Do you have a family history of thyroid disorders?"
+            Country_China: {
+                icon: Globe,
+                tooltip: "Select if you are from China"
             },
-            Radiation_Exposure: {
-                icon: AlertCircle,
-                tooltip: "Have you been exposed to radiation?"
+            Country_Germany: {
+                icon: Globe,
+                tooltip: "Select if you are from Germany"
             },
-            Iodine_Deficiency: {
-                icon: Droplet,
-                tooltip: "Do you have iodine deficiency?"
+            Country_India: {
+                icon: Globe,
+                tooltip: "Select if you are from India"
             },
-            Smoking: {
-                icon: Cigarette,
-                tooltip: "Do you smoke?"
+            Country_Luxembourg: {
+                icon: Globe,
+                tooltip: "Select if you are from Luxembourg"
             },
-            Obesity: {
-                icon: Scale,
-                tooltip: "Are you obese?"
+            Country_South_Africa: {
+                icon: Globe,
+                tooltip: "Select if you are from South Africa"
             },
-            Diabetes: {
-                icon: HeartPulse,
-                tooltip: "Do you have diabetes?"
+            Country_USA: {
+                icon: Globe,
+                tooltip: "Select if you are from USA"
             },
-            TSH_Level: {
+            TSH: {
                 icon: Activity,
-                tooltip: "Enter your TSH (Thyroid Stimulating Hormone) level"
+                tooltip: "Enter your Thyroid-stimulating hormone level"
             },
-            T3_Level: {
+            T3: {
                 icon: Activity,
-                tooltip: "Enter your T3 hormone level"
+                tooltip: "Enter your Triiodothyronine level"
             },
-            T4_Level: {
+            TT4: {
                 icon: Activity,
-                tooltip: "Enter your T4 hormone level"
+                tooltip: "Enter your Total thyroxine level"
             },
-            Nodule_Size: {
-                icon: AlertCircle,
-                tooltip: "Enter the size of thyroid nodule (if any) in mm"
+            T4U: {
+                icon: Activity,
+                tooltip: "Enter your Thyroxine uptake"
+            },
+            FTI: {
+                icon: ActivitySquare,
+                tooltip: "Enter your Free Thyroxine Index"
             }
         };
 
@@ -131,77 +134,67 @@ const ThyroidForm: React.FC<ThyroidFormProps> = ({
                         <InputField
                             label="Gender"
                             field="Gender"
-                            placeholder="0 = Female, 1 = Male"
+                            placeholder="0 = male, 1 = female"
                             tooltip={getFieldConfig("Gender").tooltip}
                             value={formData.Gender || ""}
                             onChange={handleInputChange}
                         />
                     </motion.div>
 
-                    {/* Risk Factors Section */}
+                    {/* Country Section */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: 0.2 }}
                         className="section section-2"
                     >
-                        <h2 className="text-xl font-semibold mb-4 text-primary">Risk Factors</h2>
+                        <h2 className="text-xl font-semibold mb-4 text-primary">Country</h2>
                         <InputField
-                            label="Family History"
-                            field="Family_History"
-                            placeholder="0 = No, 1 = Yes"
-                            tooltip={getFieldConfig("Family_History").tooltip}
-                            value={formData.Family_History || ""}
+                            label="China"
+                            field="Country_China"
+                            placeholder="1 if China, 0 otherwise"
+                            tooltip={getFieldConfig("Country_China").tooltip}
+                            value={formData.Country_China || ""}
                             onChange={handleInputChange}
                         />
                         <InputField
-                            label="Radiation Exposure"
-                            field="Radiation_Exposure"
-                            placeholder="0 = No, 1 = Yes"
-                            tooltip={getFieldConfig("Radiation_Exposure").tooltip}
-                            value={formData.Radiation_Exposure || ""}
+                            label="Germany"
+                            field="Country_Germany"
+                            placeholder="1 if Germany, 0 otherwise"
+                            tooltip={getFieldConfig("Country_Germany").tooltip}
+                            value={formData.Country_Germany || ""}
                             onChange={handleInputChange}
                         />
                         <InputField
-                            label="Iodine Deficiency"
-                            field="Iodine_Deficiency"
-                            placeholder="0 = No, 1 = Yes"
-                            tooltip={getFieldConfig("Iodine_Deficiency").tooltip}
-                            value={formData.Iodine_Deficiency || ""}
-                            onChange={handleInputChange}
-                        />
-                    </motion.div>
-
-                    {/* Lifestyle Factors Section */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: 0.3 }}
-                        className="section section-3"
-                    >
-                        <h2 className="text-xl font-semibold mb-4 text-primary">Lifestyle Factors</h2>
-                        <InputField
-                            label="Smoking"
-                            field="Smoking"
-                            placeholder="0 = No, 1 = Yes"
-                            tooltip={getFieldConfig("Smoking").tooltip}
-                            value={formData.Smoking || ""}
+                            label="India"
+                            field="Country_India"
+                            placeholder="1 if India, 0 otherwise"
+                            tooltip={getFieldConfig("Country_India").tooltip}
+                            value={formData.Country_India || ""}
                             onChange={handleInputChange}
                         />
                         <InputField
-                            label="Obesity"
-                            field="Obesity"
-                            placeholder="0 = No, 1 = Yes"
-                            tooltip={getFieldConfig("Obesity").tooltip}
-                            value={formData.Obesity || ""}
+                            label="Luxembourg"
+                            field="Country_Luxembourg"
+                            placeholder="1 if Luxembourg, 0 otherwise"
+                            tooltip={getFieldConfig("Country_Luxembourg").tooltip}
+                            value={formData.Country_Luxembourg || ""}
                             onChange={handleInputChange}
                         />
                         <InputField
-                            label="Diabetes"
-                            field="Diabetes"
-                            placeholder="0 = No, 1 = Yes"
-                            tooltip={getFieldConfig("Diabetes").tooltip}
-                            value={formData.Diabetes || ""}
+                            label="South Africa"
+                            field="Country_South_Africa"
+                            placeholder="1 if South Africa, 0 otherwise"
+                            tooltip={getFieldConfig("Country_South_Africa").tooltip}
+                            value={formData.Country_South_Africa || ""}
+                            onChange={handleInputChange}
+                        />
+                        <InputField
+                            label="USA"
+                            field="Country_USA"
+                            placeholder="1 if USA, 0 otherwise"
+                            tooltip={getFieldConfig("Country_USA").tooltip}
+                            value={formData.Country_USA || ""}
                             onChange={handleInputChange}
                         />
                     </motion.div>
@@ -210,40 +203,48 @@ const ThyroidForm: React.FC<ThyroidFormProps> = ({
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: 0.4 }}
-                        className="section section-4"
+                        transition={{ duration: 0.3, delay: 0.3 }}
+                        className="section section-3"
                     >
                         <h2 className="text-xl font-semibold mb-4 text-primary">Thyroid Levels</h2>
                         <InputField
-                            label="TSH Level"
-                            field="TSH_Level"
-                            placeholder="Enter TSH level"
-                            tooltip={getFieldConfig("TSH_Level").tooltip}
-                            value={formData.TSH_Level || ""}
+                            label="TSH"
+                            field="TSH"
+                            placeholder="Thyroid-stimulating hormone level"
+                            tooltip={getFieldConfig("TSH").tooltip}
+                            value={formData.TSH || ""}
                             onChange={handleInputChange}
                         />
                         <InputField
-                            label="T3 Level"
-                            field="T3_Level"
-                            placeholder="Enter T3 level"
-                            tooltip={getFieldConfig("T3_Level").tooltip}
-                            value={formData.T3_Level || ""}
+                            label="T3"
+                            field="T3"
+                            placeholder="Triiodothyronine level"
+                            tooltip={getFieldConfig("T3").tooltip}
+                            value={formData.T3 || ""}
                             onChange={handleInputChange}
                         />
                         <InputField
-                            label="T4 Level"
-                            field="T4_Level"
-                            placeholder="Enter T4 level"
-                            tooltip={getFieldConfig("T4_Level").tooltip}
-                            value={formData.T4_Level || ""}
+                            label="TT4"
+                            field="TT4"
+                            placeholder="Total thyroxine level"
+                            tooltip={getFieldConfig("TT4").tooltip}
+                            value={formData.TT4 || ""}
                             onChange={handleInputChange}
                         />
                         <InputField
-                            label="Nodule Size"
-                            field="Nodule_Size"
-                            placeholder="Enter nodule size in mm"
-                            tooltip={getFieldConfig("Nodule_Size").tooltip}
-                            value={formData.Nodule_Size || ""}
+                            label="T4U"
+                            field="T4U"
+                            placeholder="Thyroxine uptake"
+                            tooltip={getFieldConfig("T4U").tooltip}
+                            value={formData.T4U || ""}
+                            onChange={handleInputChange}
+                        />
+                        <InputField
+                            label="FTI"
+                            field="FTI"
+                            placeholder="Free Thyroxine Index"
+                            tooltip={getFieldConfig("FTI").tooltip}
+                            value={formData.FTI || ""}
                             onChange={handleInputChange}
                         />
                     </motion.div>

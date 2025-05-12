@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/857474297804956494
+creation_time: 1747054324274
+experiment_id: '857474297804956494'
+last_update_time: 1747054324274
+lifecycle_stage: active
+name: lung_cancer

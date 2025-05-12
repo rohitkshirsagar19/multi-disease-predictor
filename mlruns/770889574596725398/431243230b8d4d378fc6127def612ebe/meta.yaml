@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/770889574596725398/431243230b8d4d378fc6127def612ebe/artifacts
+end_time: 1747054403441
+entry_point_name: ''
+experiment_id: '770889574596725398'
+lifecycle_stage: active
+run_id: 431243230b8d4d378fc6127def612ebe
+run_name: test2
+run_uuid: 431243230b8d4d378fc6127def612ebe
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747054395336
+status: 3
+tags: []
+user_id: rishabh

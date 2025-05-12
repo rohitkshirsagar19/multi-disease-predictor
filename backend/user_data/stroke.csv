@@ -1,0 +1,2 @@
+gender,age,hypertension,heart_disease,ever_married,work_type,Residence_type,avg_glucose_level,bmi,smoking_status,target
+1,43.0,1,1,1,1,1,32.0,12.0,1,0

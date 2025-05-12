@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/405359612764013327/fac35a7e5f904e9c932071bf4c62ba1f/artifacts
+end_time: 1744267816599
+entry_point_name: ''
+experiment_id: '405359612764013327'
+lifecycle_stage: active
+run_id: fac35a7e5f904e9c932071bf4c62ba1f
+run_name: lung_cancer
+run_uuid: fac35a7e5f904e9c932071bf4c62ba1f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744267811766
+status: 3
+tags: []
+user_id: riku

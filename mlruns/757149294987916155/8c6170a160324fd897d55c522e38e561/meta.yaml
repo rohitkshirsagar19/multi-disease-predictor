@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/757149294987916155/8c6170a160324fd897d55c522e38e561/artifacts
+deleted_time: 1744534931874
+end_time: 1744534293854
+entry_point_name: ''
+experiment_id: '757149294987916155'
+lifecycle_stage: deleted
+run_id: 8c6170a160324fd897d55c522e38e561
+run_name: mysterious-shad-469
+run_uuid: 8c6170a160324fd897d55c522e38e561
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744534290983
+status: 3
+tags: []
+user_id: parth

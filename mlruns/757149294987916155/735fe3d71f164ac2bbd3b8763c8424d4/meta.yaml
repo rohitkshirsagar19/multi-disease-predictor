@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/757149294987916155/735fe3d71f164ac2bbd3b8763c8424d4/artifacts
+deleted_time: 1744534931864
+end_time: 1744534722506
+entry_point_name: ''
+experiment_id: '757149294987916155'
+lifecycle_stage: deleted
+run_id: 735fe3d71f164ac2bbd3b8763c8424d4
+run_name: upbeat-hawk-336
+run_uuid: 735fe3d71f164ac2bbd3b8763c8424d4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744534718275
+status: 3
+tags: []
+user_id: parth

@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+
 lib64/
 parts/
 sdist/
@@ -58,6 +58,12 @@ target/
 
 # DotEnv configuration
 .env
+.env2/
+.venv/
+.venv
+# virtualenv
+venv/
+# virtualenv
 
 # Database
 *.db
@@ -76,7 +82,7 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
+#/data/
 
 # Mac OS-specific storage files
 .DS_Store
@@ -87,3 +93,7 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+
+/test_features
+

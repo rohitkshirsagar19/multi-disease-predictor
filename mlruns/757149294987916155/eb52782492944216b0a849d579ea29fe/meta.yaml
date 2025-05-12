@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/757149294987916155/eb52782492944216b0a849d579ea29fe/artifacts
+deleted_time: 1744534931865
+end_time: 1744534337572
+entry_point_name: ''
+experiment_id: '757149294987916155'
+lifecycle_stage: deleted
+run_id: eb52782492944216b0a849d579ea29fe
+run_name: resilient-finch-885
+run_uuid: eb52782492944216b0a849d579ea29fe
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744534334787
+status: 3
+tags: []
+user_id: parth

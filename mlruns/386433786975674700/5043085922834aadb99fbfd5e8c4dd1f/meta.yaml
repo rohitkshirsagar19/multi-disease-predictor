@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/386433786975674700/5043085922834aadb99fbfd5e8c4dd1f/artifacts
+end_time: 1744267026076
+entry_point_name: ''
+experiment_id: '386433786975674700'
+lifecycle_stage: active
+run_id: 5043085922834aadb99fbfd5e8c4dd1f
+run_name: anemia
+run_uuid: 5043085922834aadb99fbfd5e8c4dd1f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744267026034
+status: 3
+tags: []
+user_id: riku

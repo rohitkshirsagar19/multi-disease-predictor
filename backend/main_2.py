@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import joblib
 import os
 import pandas as pd
-from retrain import retrain_model
+from src.retrain import retrain_model
 
 app = FastAPI()
 

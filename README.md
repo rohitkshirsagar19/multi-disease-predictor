@@ -106,7 +106,7 @@ Frontend: http://localhost:3000
 
 ## 🤝 Contributors
 
-Thanks to these amazing people for making EduLite OS possible:
+Thanks to these amazing people :
 
 
 

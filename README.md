@@ -1,103 +1,122 @@
-# Multi-Disease Predictor
+# 🧠 Multi-Disease Predictor
 
-![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.8%2B-green)
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
+A full-stack Machine Learning application that allows users to predict **8 different diseases** based on user inputs. The system is designed with a modular backend in FastAPI and a responsive frontend in React with TailwindCSS, and includes functionality for **online learning** via user feedback and retraining!
 
-> An intelligent system that predicts multiple diseases using machine learning algorithms and patient data.
+---
 
-## ✨ Overview
+![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-%2300C7B7.svg?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwindcss&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-0194f3?logo=mlflow&logoColor=white)
+![Joblib](https://img.shields.io/badge/Joblib-003366?logo=scikit-learn&logoColor=white)
+![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-Multi-Disease Predictor is an advanced machine learning application designed to assist healthcare professionals in early disease detection. By analyzing patient data points and symptoms, this tool provides probabilistic predictions across multiple medical conditions, enhancing diagnostic capabilities.
+---
 
 ## 🚀 Features
 
-- **Multi-disease classification**: Simultaneously evaluate risk across multiple conditions
-- **Data preprocessing pipeline**: Automated cleaning and feature extraction
-- **Interactive visualizations**: Clearly interpret prediction results
-- **Configurable models**: Easily switch between different ML algorithms
-- **Privacy-focused**: Secure handling of sensitive medical data
+- 🩺 Predicts the likelihood of:
+  - Anemia
+  - Cardiovascular Disease
+  - Heart Disease
+  - Hepatitis C
+  - Liver Disease
+  - Lung Cancer
+  - Stroke
+  - Thyroid Disease
+- ⚡ Built with FastAPI backend and Vite+React frontend
+- 🔁 Supports user feedback and model retraining via `/submit_data/{disease}` and `/retrain/{disease}` APIs
+- 🧪 MLflow integration for experiment tracking
+- 🐳 Dockerized for seamless deployment
 
-## 🛠️ Project Structure
+---
 
+## 🧰 Tech Stack
+
+| Layer        | Technologies |
+| ------------ | ------------ |
+| **Frontend** | ![React](https://img.shields.io/badge/React-20232a?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?logo=typescript) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwindcss) |
+| **Backend**  | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi) ![Uvicorn](https://img.shields.io/badge/Uvicorn-003366?logo=python&logoColor=white) |
+| **ML Models**| ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn) ![joblib](https://img.shields.io/badge/joblib-003366?logo=python) |
+| **MLOps**    | ![MLflow](https://img.shields.io/badge/MLflow-0194f3?logo=mlflow) |
+| **DevOps**   | ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions) |
+
+---
+
+## 🏗️ Project Structure
+
+```bash
+multi-disease-predictor/
+├── backend/               # FastAPI server + ML models + retraining
+├── frontend/              # React (Vite + TailwindCSS) UI
+├── models/                # Pretrained ML models
+├── notebooks/             # Jupyter Notebooks for experiments
+├── mlruns/                # MLflow runs
+├── mlartifacts/           # MLflow artifacts
+├── data/                  # Raw and processed datasets
+├── docs/                  # Sphinx documentation
+├── docker-compose.yml     # Docker orchestration
+└── tests/                 # API test scripts
 ```
-├── data                   # Data directory (raw, processed, external)
-├── models                 # Trained models and model metadata
-├── notebooks              # Exploratory data analysis and examples
-├── reports                # Generated analysis reports and visualizations
-├── src                    # Source code for the project
-│   ├── data               # Scripts for data processing
-│   ├── features           # Scripts for feature engineering
-│   ├── models             # Scripts for model training and prediction
-│   └── visualization      # Scripts for data visualization
-├── Makefile               # Rules for automating common tasks
-└── requirements.txt       # Project dependencies
+---
+
+## 🖥️ Local Setup
+🔧 Prerequisites
+
+    Python 3.10+
+
+    Node.js 18+
+
+    Docker (for containerized deployment)
+
+    pip or conda
+
+## 🐍 Backend
+
+#Create virtualenv and activate
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+# Install dependencies
+```bash
+pip install -r requirements.txt
+```
+# Start FastAPI server
+```bash
+cd backend
+uvicorn main_2:app --reload
+```
+## 🌐 Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+## 🐳 Run with Docker Compose
+```bash
+docker-compose up --build
 ```
 
-## 🔧 Installation
+Backend: http://localhost:8000
 
-1. Clone this repository
-   ```
-   git clone https://github.com/yourusername/multi-disease-predictor.git
-   cd multi-disease-predictor
-   ```
+Frontend: http://localhost:3000
 
-2. Create and activate a virtual environment (optional but recommended)
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+## 🤝 Contributors
 
-3. Install the required dependencies
-   ```
-   pip install -r requirements.txt
-   ```
+Thanks to these amazing people for making EduLite OS possible:
 
-4. Set up the project
-   ```
-   make create_environment
-   ```
 
-## 📊 Usage
-
-1. Prepare your data
-   ```
-   make data
-   ```
-
-2. Train models
-   ```
-   python src/models/train_model.py
-   ```
-
-3. Run predictions
-   ```
-   python src/models/predict_model.py
-   ```
-
-## 📝 Development
-
-- Run tests: `make test`
-- Check code style: `make lint`
-- Generate documentation: `make docs`
-
-## 👥 Team
 
 | Name               | GitHub Profile                                     |
 |--------------------|----------------------------------------------------|
 | Rohit Kshirsagar   | [@rohitkshirsagar19](https://github.com/rohitkshirsagar19) |
 | Parth Lhase        | [@LhaseParth2610](https://github.com/LhaseParth2610)       |
 | Rishabh Kothari    | [@RishabhK103](https://github.com/RIshabhK103)             |
-| Prajwal Khumbhar   | [@prajwalkumbhar29](https://github.com/prajwalkumbhar29)   |
+| Prajwal Kumbhar    | [@prajwalkumbhar29](https://github.com/prajwalkumbhar29)                   |
 
-## 📄 License
+## 🪪 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<p align="center">
-  <small>
-    Built with ❤️ using the <a href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>
-  </small>
-</p>
+This project is licensed under the MIT License. See the LICENSE file for details.

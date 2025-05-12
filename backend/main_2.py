@@ -9,14 +9,14 @@ app = FastAPI()
 
 # === MODEL PATHS ===
 MODEL_PATHS = {
-    "anemia": "../models/anemia.joblib/model.pkl",
-    "lung_cancer": "../models/lung_cancer.joblib/model.pkl",
-    "hepatitis": "../models/hepatitis.joblib/hepatitis.joblib",
-    "cardiovascular": "../models/cardiovascular.joblib/cardiovascular.joblib",
-    "thyroid": "../models/thyroid_model/thyroid_model.joblib",   # Added thyroid
-    "heart": "../models/heart.joblib/heart_model.joblib",          # Added heart
-    "liver": "../models/liver.joblib/liver.joblib",
-    "stroke": "../models/stroke.joblib/stroke.joblib",
+    "anemia": "models/anemia.joblib/model.pkl",
+    "lung_cancer": "models/lung_cancer.joblib/model.pkl",
+    "hepatitis": "models/hepatitis.joblib/hepatitis.joblib",
+    "cardiovascular": "models/cardiovascular.joblib/cardiovascular.joblib",
+    "thyroid": "models/thyroid_model/thyroid_model.joblib",   # Added thyroid
+    "heart": "models/heart.joblib/heart_model.joblib",          # Added heart
+    "liver": "models/liver.joblib/liver.joblib",
+    "stroke": "models/stroke.joblib/stroke.joblib",
     # Add more diseases here
 }
 
@@ -27,7 +27,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],  # Adjust to match your frontend's URL
+    allow_origins=["*"],  # Adjust to match your frontend's URL
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods (GET, POST, OPTIONS, etc.)
     allow_headers=["*"],  # Allow all headers
@@ -131,6 +131,19 @@ class ThyroidInput(BaseModel):
     T3_Level: float
     T4_Level: float
     Nodule_Size: float
+    Country_China: float
+    Country_Germany: float
+    Country_India: float
+    Country_Japan: float
+    Country_Nigeria: float
+    Country_Russia: float
+    Country_South_Korea: float
+    Country_UK: float
+    Country_USA: float
+    Ethnicity_Asian: float
+    Ethnicity_Caucasian: float
+    Ethnicity_Hispanic: float
+    Ethnicity_Middle_Eastern: float
 
 class LiverInput(BaseModel):
     Age : int  
